@@ -1,1 +1,3 @@
-
+git rm --cached <Blockchain_Scenarios_Transactions.postman_collection.json>
+git commit -m "Remove file from repo but keep locally"
+git push origin main
