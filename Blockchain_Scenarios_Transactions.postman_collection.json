@@ -1,0 +1,92 @@
+{
+  "info": {
+    "name": "Blockchain Scenarios Transactions",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Refurbishment Transaction",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"scenarioType\": \"Refurbishment\",\n  \"details\": {\n    \"productId\": \"P-1001\",\n    \"repairCenter\": \"RepairCenter-01\",\n    \"cost\": 150,\n    \"destination\": \"SecondaryMarket\"\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3001/transaction/broadcast",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "transaction",
+            "broadcast"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Remanufacturing Transaction",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"scenarioType\": \"Remanufacturing\",\n  \"details\": {\n    \"productId\": \"P-2001\",\n    \"factory\": \"Factory-09\",\n    \"dismantlingCost\": 300,\n    \"transportCost\": 50,\n    \"output\": \"RemanufacturedProduct\"\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3001/transaction/broadcast",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "transaction",
+            "broadcast"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Recycling Transaction",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"scenarioType\": \"Recycling\",\n  \"details\": {\n    \"productId\": \"P-3001\",\n    \"recyclingCompany\": \"RecycleCo\",\n    \"materialValue\": 80,\n    \"transportCost\": 20,\n    \"certificate\": \"GreenCert-2025\"\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3001/transaction/broadcast",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "transaction",
+            "broadcast"
+          ]
+        }
+      }
+    }
+  ]
+}
