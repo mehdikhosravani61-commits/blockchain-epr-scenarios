@@ -1,33 +1,49 @@
 const Blockchain = require('./blockchain');
 
-const blockchain = new Blockchain();
+const bitcoin = new Blockchain();
 
-// Example transactions for 3 scenarios
-const tx1 = blockchain.createNewTransaction("Refurbishment", {
-  productId: "P-1001",
-  repairCenter: "RepairCenter-01",
-  cost: 150,
-  destination: "SecondaryMarket"
-});
+// اضافه کردن چند تراکنش تستی
+bitcoin.createNewTransaction(
+  "Recycling",                   // scenarioType
+  "DE-BE",                       // region
+  "Electronics-Screen",          // sorting
+  "ITEM12345",                   // itemId
+  { brand: "Samsung", condition: "Broken screen" } // details
+);
 
-const tx2 = blockchain.createNewTransaction("Remanufacturing", {
-  productId: "P-2001",
-  factory: "Factory-09",
-  dismantlingCost: 300,
-  transportCost: 50,
-  output: "RemanufacturedProduct"
-});
+bitcoin.createNewTransaction(
+  "Refurbishment",
+  "US-NY",
+  "Furniture-Chair",
+  "ITEM54321",
+  { material: "Wood", status: "Needs repaint" }
+);
 
-const tx3 = blockchain.createNewTransaction("Recycling", {
-  productId: "P-3001",
-  recyclingCompany: "RecycleCo",
-  materialValue: 80,
-  transportCost: 20,
-  certificate: "GreenCert-2025"
-});
+bitcoin.createNewTransaction(
+  "Remanufacturing",
+  "FR-PAR",
+  "Automotive-Engine",
+  "ITEM77777",
+  { manufacturer: "Renault", issue: "Cylinder damage" }
+);
 
-blockchain.addTransactionToPendingTransactions(tx1);
-blockchain.addTransactionToPendingTransactions(tx2);
-blockchain.addTransactionToPendingTransactions(tx3);
+// ماین کردن یک بلاک جدید
+console.log("Mining a new block...");
+const lastBlock = bitcoin.getLastBlock();
+const previousBlockHash = lastBlock['hash'];
 
-console.log("Pending Transactions:", blockchain.pendingTransactions);
+const currentBlockData = {
+  transactions: bitcoin.pendingTransactions,
+  index: lastBlock['index'] + 1
+};
+
+const nonce = bitcoin.proofOfWork(previousBlockHash, currentBlockData);
+const blockHash = bitcoin.hashBlock(previousBlockHash, currentBlockData, nonce);
+
+const newBlock = bitcoin.createNewBlock(nonce, previousBlockHash, blockHash);
+
+console.log("New block mined:", newBlock);
+
+// نمایش کل بلاکچین
+console.log("\nFull Blockchain:");
+console.log(JSON.stringify(bitcoin, null, 2));
